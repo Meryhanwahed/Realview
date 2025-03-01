@@ -1,0 +1,43 @@
+header {
+    .navbar {
+      box-shadow: 0 0 10px var(--main-color);
+      height: 70px;
+      padding: 0.5rem 1rem;
+  
+      @media (max-width: 997px) {
+        height: auto;
+        padding: 0.2rem 1rem;
+      }
+    }
+  
+    .navbar-brand img {
+      max-width: 70px;
+      height: auto;
+      @media (max-width: 997px) {
+        max-width: 60px;
+      }
+    }
+  
+    .navbar-toggler {
+      padding: 0.25rem 0.75rem;
+      @media (max-width: 997px) {
+        padding: 0.2rem 0.5rem;
+      }
+    }
+  
+    .nav-link {
+      padding: 0.75rem 1rem;
+      @media (max-width: 997px) {
+        padding: 0.5rem 0.75rem;
+      }
+    }
+  
+    .nav-link:hover {
+      background-color: var(--border-color);
+    }
+  
+    .nav-link.active-link {
+      background-color: var(--main-color);
+      color: var(--white-color);
+    }
+  }
