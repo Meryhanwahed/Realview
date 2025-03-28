@@ -1,0 +1,33 @@
+<div class="filter-container">
+    <div class="row">
+      <!-- Type Filter -->
+      <div class="col-md-3">
+        <label for="type">Type:</label>
+        <select class="form-control" id="type" [(ngModel)]="filter.type" (change)="applyFilter()">
+          <option value="">All</option>
+          <option value="Apartment">Apartment</option>
+          <option value="Villa">Villa</option>
+          <option value="Office">Office</option>
+        </select>
+      </div>
+  
+      <!-- Min Price -->
+      <div class="col-md-3">
+        <label for="minPrice">Min Price:</label>
+        <input type="number" class="form-control" id="minPrice" [(ngModel)]="filter.minPrice" (input)="applyFilter()">
+      </div>
+  
+      <!-- Max Price -->
+      <div class="col-md-3">
+        <label for="maxPrice">Max Price:</label>
+        <input type="number" class="form-control" id="maxPrice" [(ngModel)]="filter.maxPrice" (input)="applyFilter()">
+      </div>
+  
+      <!-- Location -->
+      <div class="col-md-3">
+        <label for="location">Location:</label>
+        <input type="text" class="form-control" id="location" [(ngModel)]="filter.location" (input)="applyFilter()">
+      </div>
+    </div>
+  </div>
+  

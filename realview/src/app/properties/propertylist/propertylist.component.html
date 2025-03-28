@@ -1,0 +1,23 @@
+<div class="container">
+    <h2 class="text-center mt-4">Available Properties</h2>
+  
+    <!-- Filter Component -->
+    <app-property-filter (filterChanged)="applyFilter($event)"></app-property-filter>
+  
+    <!-- Sorting Dropdown -->
+    <div class="form-group mt-3">
+      <label for="sortOptions">Sort By:</label>
+      <select id="sortOptions" class="form-control" [(ngModel)]="sortBy" (change)="sortProperties()">
+        <option value="price">Price</option>
+        <option value="location">Location</option>
+      </select>
+    </div>
+  
+    <!-- Properties Grid -->
+    <div class="row mt-4">
+      <div class="col-md-4 mb-4" *ngFor="let property of filteredProperties">
+        <app-propertycard [property]="property"></app-propertycard>
+      </div>
+    </div>
+  </div>
+  

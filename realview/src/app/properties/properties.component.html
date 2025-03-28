@@ -1,1 +1,9 @@
-<p>properties works!</p>
+<div class="container">
+    
+
+    <!-- مكون الخريطة -->
+    <app-map-view [properties]="filteredProperties"></app-map-view>
+
+    <!-- قائمة العقارات -->
+    <app-property-list [properties]="filteredProperties"></app-property-list>
+</div>

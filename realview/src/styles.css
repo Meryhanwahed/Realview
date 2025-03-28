@@ -2,13 +2,13 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
 
 :root {
-  --main-color: #224814;
+  --main-color: #34495e;
   --white-color: #fff;
   --black-color: #000;
   --paragraph-color: #575a7b;
-  --btn-hover-color: #73bba3;
+  --btn-hover-color: #7381bb;
   --main-transition: 0.4s;
-  --bg-green-color: #b4e380;
+  --bg-green-color: #808fe3;
   --border-color: #ededed;
 }
 

@@ -1,0 +1,10 @@
+<div class="content">
+    <h2>Saved Properties</h2>
+    <div *ngFor="let property of savedProperties" class="property-card">
+      <img [src]="property.image" alt="property">
+      <h4>{{ property.title }}</h4>
+      <p>{{ property.price | currency:'USD' }}</p>
+      <button (click)="removeFromSaved(property.id)">❌ Remove from Saved</button>
+    </div>
+  </div>
+  

@@ -1,47 +1,71 @@
+// src/app/register/register.component.ts
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule,Router } from '@angular/router';
-import { CommonModule } from '@angular/common'; // ✅ Fixes *ngIf issue
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from '../services/auth.service'; 
 
 @Component({
   selector: 'app-register',
-   standalone: true,
-   imports: [CommonModule, ReactiveFormsModule, RouterModule], // ✅ Add required modules
-   templateUrl: './register.component.html',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule,
+    HttpClientModule
+  ],
+  templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
   registerForm: FormGroup;
+  submitted = false;
+  errorMessage: string = '';
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.registerForm = this.fb.group({
-      fullname: ['', [Validators.required, Validators.minLength(3)]],
+      username: ['', Validators.required],
+      nationalId: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]]
-    }, { validator: this.passwordMatchValidator });
+    }, {
+      validators: this.passwordMatchValidator
+    });
   }
 
-  // Custom Validator: Check if Passwords Match
-  passwordMatchValidator(formGroup: FormGroup) {
-    return formGroup.get('password')?.value === formGroup.get('confirmPassword')?.value 
+  passwordMatchValidator(form: FormGroup) {
+    return form.get('password')?.value === form.get('confirmPassword')?.value
       ? null : { mismatch: true };
   }
 
-  // Getter for easy access to form fields
-  get f() { return this.registerForm.controls; }
-
   onSubmit() {
-   if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
-      this.router.navigate(['/login']); // ✅ Redirect after successful registration
+    this.submitted = true;
+
+    if (this.registerForm.invalid) {
+      return;
     }
 
-    // Simulate API Call (You can replace this with a real HTTP request)
-    console.log('User Registered:', this.registerForm.value);
+    const userData = {
+      username: this.registerForm.value.username,
+      nationalId: this.registerForm.value.nationalId,
+      email: this.registerForm.value.email,
+      password: this.registerForm.value.password
+    };
 
-    // Redirect to Login Page After Successful Registration
-    alert('Registration Successful! Redirecting to login...');
-    this.router.navigate(['/login']);
+    this.authService.register(userData).subscribe({
+      next: () => {
+        this.router.navigate(['/login']);
+      },
+      error: (error) => {
+        console.error('Registration failed', error);
+        this.errorMessage = error.error.message || 'Registration failed. Please try again.';
+      }
+    });
   }
 }

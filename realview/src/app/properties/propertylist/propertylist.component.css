@@ -1,0 +1,13 @@
+.container {
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  h2 {
+    color: #333;
+  }
+  
+  .form-control {
+    margin-bottom: 10px;
+  }
+  

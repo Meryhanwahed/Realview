@@ -1,22 +1,22 @@
 footer {
     background-color: #232020;
     h5 {
-      color: var(--white-color);
+      color: var(--main-color);
       margin-bottom: 20px;
     }
     .nav-link {
-      color: #ffffffd4;
+      color: var(--main-color);
       transition: var(--main-transition);
     }
     .nav-link:hover {
-      color: #f6fb7a;
+      color: var(--btn-hover-color);
     }
     .link-body-emphasis + p {
-      color: #ffffffd4;
+      color: var(--main-color);
     }
     .contact-info {
       li {
-        color: #ffffffd4;
+        color: var(--main-color);
         .icon {
           margin-left: 10px;
         }
@@ -24,7 +24,7 @@ footer {
     }
     form {
       p {
-        color: #ffffffd4;
+        color: var(--main-color);
       }
       .form-control {
         box-shadow: none !important;
@@ -55,7 +55,7 @@ footer {
     }
     .rights {
       p {
-        color: #ffffffd4;
+        color: var(--main-color);
       }
       .link-body-emphasis {
         background-color: #484646;
@@ -69,7 +69,7 @@ footer {
         transition: var(--main-transition);
       }
       .link-body-emphasis:hover {
-        background-color: #f6fb7a;
+        background-color: var(--main-color);
         transform: translateY(-10px);
       }
       .link-body-emphasis:hover i {
