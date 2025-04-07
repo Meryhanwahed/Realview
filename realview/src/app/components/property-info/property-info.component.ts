@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './property-info.component.html',
-  styleUrls: ['./property-info.component.scss']
+  styleUrls: ['./property-info.component.css']
 })
 export class PropertyInfoComponent {
   @Input() type!: string;

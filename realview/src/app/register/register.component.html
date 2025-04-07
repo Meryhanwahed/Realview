@@ -17,7 +17,7 @@
       <label for="nationalId">National ID</label>
       <input id="nationalId" type="text" formControlName="nationalId" placeholder="Enter National ID" />
       <div *ngIf="registerForm.get('nationalId')?.touched && registerForm.get('nationalId')?.invalid" class="error">
-        National ID is required and must be valid.
+        National ID must be a valid number (10-15 digits).
       </div>
     </div>
 
@@ -39,12 +39,52 @@
       </div>
     </div>
 
-    <!-- Confirm Password -->
+    <!-- Gender -->
     <div class="form-group">
-      <label for="confirmPassword">Confirm Password</label>
-      <input id="confirmPassword" type="password" formControlName="confirmPassword" placeholder="Confirm password" />
-      <div *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.hasError('passwordMismatch')" class="error">
-        Passwords do not match.
+      <label for="gender">Gender</label>
+      <select id="gender" formControlName="gender">
+        <option value="">Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+      <div *ngIf="registerForm.get('gender')?.touched && registerForm.get('gender')?.invalid" class="error">
+        Gender is required.
+      </div>
+    </div>
+
+    <!-- Age -->
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input id="age" type="number" formControlName="age" placeholder="Enter age" />
+      <div *ngIf="registerForm.get('age')?.touched && registerForm.get('age')?.invalid" class="error">
+        Age must be between 1 and 100.
+      </div>
+    </div>
+
+    <!-- Phone -->
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input id="phone" type="text" formControlName="phone" placeholder="Enter phone number" />
+      <div *ngIf="registerForm.get('phone')?.touched && registerForm.get('phone')?.invalid" class="error">
+        Phone number must be 10-15 digits.
+      </div>
+    </div>
+
+    <!-- User Type -->
+    <div class="form-group">
+      <label for="usertype">User Type</label>
+      <input id="usertype" type="text" formControlName="usertype" placeholder="Enter user type" />
+      <div *ngIf="registerForm.get('usertype')?.touched && registerForm.get('usertype')?.invalid" class="error">
+        User type is required.
+      </div>
+    </div>
+
+    <!-- Address -->
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input id="address" type="text" formControlName="address" placeholder="Enter address" />
+      <div *ngIf="registerForm.get('address')?.touched && registerForm.get('address')?.invalid" class="error">
+        Address is required.
       </div>
     </div>
 
@@ -52,5 +92,3 @@
     <button type="submit" [disabled]="registerForm.invalid">Register</button>
   </form>
 </div>
-
-  

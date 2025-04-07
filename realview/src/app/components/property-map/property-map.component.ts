@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './property-map.component.html',
-  styleUrls: ['./property-map.component.scss']
+  styleUrls: ['./property-map.component.css']
 })
 export class PropertyMapComponent implements AfterViewInit {
   @Input() latitude!: number;

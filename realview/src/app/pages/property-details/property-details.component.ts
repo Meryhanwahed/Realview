@@ -20,7 +20,7 @@ import { ActivatedRoute } from '@angular/router';
     ContactFormComponent
   ],
   templateUrl: './property-details.component.html',
-  styleUrls: ['./property-details.component.scss']
+  styleUrls: ['./property-details.component.css']
 })
 export class PropertyDetailsComponent implements OnInit {
   propertyId!: number;

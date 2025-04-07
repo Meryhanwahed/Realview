@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './property-carousel.component.html',
-  styleUrls: ['./property-carousel.component.scss']
+  styleUrls: ['./property-carousel.component.css']
 })
 export class PropertyCarouselComponent {
   @Input() images: string[] = [];

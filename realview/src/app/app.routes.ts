@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { MyPropertiesComponent } from './user-dashboard/my-properties/my-properties.component';
@@ -12,6 +11,7 @@ import { RouterModule} from '@angular/router';
 import { AddPropertyComponent } from './add-property/add-property.component';
 import { PropertiesPageComponent } from './properties/properties.component';
 import { PropertyDetailsComponent } from './pages/property-details/property-details.component';
+import { HomeComponent } from './pages/home/home.component';
 export const routes: Routes = [
   {
     path: 'property-details/:id',

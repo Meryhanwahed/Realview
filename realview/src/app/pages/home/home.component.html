@@ -1,0 +1,44 @@
+<section class="search-bar">
+  <form (submit)="onSearch(); $event.preventDefault()">
+    <input type="text" [(ngModel)]="searchQuery" name="search" placeholder="🔍 Search for a property..." class="search-input" />
+    <button type="submit" class="search-btn">Search</button>
+  </form>
+</section>
+
+<section class="map-container">
+  <div id="map"></div>
+</section>
+
+<section class="featured-properties">
+  <h2>🏡 Featured Properties</h2>
+  <div class="property-list">
+    <div class="property-card" *ngFor="let property of filteredProperties">
+      <img [src]="property.image" alt="Property Image">
+      <h3>{{ property.title }}</h3>
+      <p>💰 Price: ${{ property.price }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="property-categories">
+  <h2>🏢 Property Categories</h2>
+  <div class="categories">
+    <button 
+      *ngFor="let category of ['Apartments', 'Villas', 'Lands', 'Commercial Offices']" 
+      class="category-btn" 
+      [class.active]="selectedCategory === category"
+      (click)="filterByCategory(category)">
+      {{ category }}
+    </button>
+    <button class="category-btn" (click)="filterByCategory('')">All</button>
+  </div>
+</section>
+
+<section class="why-us">
+  <h2>❓ Why Choose Us?</h2>
+  <p>🔹 Easy search & filtering 🔹 Seamless user experience 🔹 Fast data loading</p>
+</section>
+
+<section class="cta">
+  <button class="add-property-btn"><a routerLink="/my-properties">📝 Add Your Property Now</a></button>
+</section>

@@ -30,18 +30,15 @@ export class RegisterComponent {
   ) {
     this.registerForm = this.fb.group({
       username: ['', Validators.required],
-      nationalId: ['', Validators.required],
+      nationalId: ['', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required]]
-    }, {
-      validators: this.passwordMatchValidator
+      gender: ['', Validators.required],
+      age: ['', [Validators.required, Validators.min(1), Validators.max(100)]],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]],
+      usertype: ['', Validators.required],
+      address: ['', Validators.required],
     });
-  }
-
-  passwordMatchValidator(form: FormGroup) {
-    return form.get('password')?.value === form.get('confirmPassword')?.value
-      ? null : { mismatch: true };
   }
 
   onSubmit() {
@@ -51,14 +48,7 @@ export class RegisterComponent {
       return;
     }
 
-    const userData = {
-      username: this.registerForm.value.username,
-      nationalId: this.registerForm.value.nationalId,
-      email: this.registerForm.value.email,
-      password: this.registerForm.value.password
-    };
-
-    this.authService.register(userData).subscribe({
+    this.authService.register(this.registerForm.value).subscribe({
       next: () => {
         this.router.navigate(['/login']);
       },

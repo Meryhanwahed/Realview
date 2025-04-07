@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './property-description.component.html',
-  styleUrls: ['./property-description.component.scss']
+  styleUrls: ['./property-description.component.css']
 })
 export class PropertyDescriptionComponent {
   @Input() description!: string;
