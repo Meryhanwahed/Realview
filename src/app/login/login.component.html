@@ -1,24 +1,28 @@
-<div class="container">
-    <div class="login">
+<div class="login-container">
+    <div class="login-box">
+      <div class="login-image">
         <img 
-            src="#" 
-            alt="Register Illustration"
-            loading="lazy" 
+          src="../../assets/images/login/download.png" 
+          alt="Login Illustration"
+          loading="lazy"
         />
-        <h1>LOGIN</h1>
-        <div class="form">
-            <form>
-                <label for="email">E-mail Address</label>
-                <input type="email" id="email" placeholder="Enter your email" required />
-
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter your password" required />
-
-                <a href="#" class="forgot-password">Forgot password?</a>
-                <a routerLink="/register" class="register-link">Create a new account</a>
-
-                <button type="submit">Login</button>
-            </form>
-        </div>
+      </div>
+      <div class="login-form">
+        <h2>Welcome Back 👋</h2>
+        <form>
+          <div class="form-group">
+            <input type="email" placeholder="Enter your email" required />
+          </div>
+          <div class="form-group">
+            <input type="password" placeholder="Enter your password" required />
+          </div>
+          <div class="form-links">
+            <a href="#" class="forgot-password">Forgot password?</a>
+            <a routerLink="/register" class="register-link">Create account</a>
+          </div>
+          <button type="submit">Login</button>
+        </form>
+      </div>
     </div>
-</div>
+  </div>
+  

@@ -1,10 +1,18 @@
-<div class="content">
-    <h2>Contact Requests</h2>
-    <ul>
-      <li *ngFor="let request of contactRequests">
-        <strong>{{ request.name }}</strong> | {{ request.message }} | {{ request.phone }}
-        <button (click)="deleteRequest(request.id)">❌ Delete</button>
-      </li>
-    </ul>
+<div class="contact-container">
+  <h2>📥 Contact Requests</h2>
+
+  <div *ngIf="contactRequests.length === 0" class="empty-msg">
+    No contact requests yet.
   </div>
-  
+
+  <ul class="request-list">
+    <li *ngFor="let request of contactRequests" class="request-card">
+      <div class="request-details">
+        <h4>{{ request.name }}</h4>
+        <p class="message">💬 {{ request.message }}</p>
+        <p class="phone">📞 {{ request.phone }}</p>
+      </div>
+      <button (click)="deleteRequest(request.id)">🗑️ Delete</button>
+    </li>
+  </ul>
+</div>

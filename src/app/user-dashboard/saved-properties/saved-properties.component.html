@@ -1,10 +1,15 @@
-<div class="content">
-    <h2>Saved Properties</h2>
-    <div *ngFor="let property of savedProperties" class="property-card">
-      <img [src]="property.image" alt="property">
+<div class="saved-container">
+  <h2> Saved Properties</h2>
+  <div *ngIf="savedProperties.length === 0" class="empty-msg">
+    No saved properties yet.
+  </div>
+
+  <div *ngFor="let property of savedProperties" class="saved-card">
+    <img [src]="property.image" alt="Property image">
+    <div class="details">
       <h4>{{ property.title }}</h4>
       <p>{{ property.price | currency:'USD' }}</p>
-      <button (click)="removeFromSaved(property.id)">❌ Remove from Saved</button>
+      <button (click)="removeFromSaved(property.id)">Remove ❌</button>
     </div>
   </div>
-  
+</div>
