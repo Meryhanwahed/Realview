@@ -1,0 +1,5 @@
+<form (submit)="onSearch(); $event.preventDefault()" class="search-bar">
+    <input type="text" placeholder="🔍 Search for a property..." [(ngModel)]="searchQuery" name="search" class="search-input" />
+    <button type="submit" class="search-btn">Search</button>
+  </form>
+  

@@ -1,0 +1,23 @@
+.cta {
+    text-align: center;
+    margin: 40px 0;
+  }
+  
+  .add-property-btn {
+    background-color: var(--main-color);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .add-property-btn:hover {
+    background-color: var(--main-color);
+    transform: scale(1.05);
+  }
+  

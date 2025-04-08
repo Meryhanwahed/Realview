@@ -1,0 +1,11 @@
+<section class="featured-properties" *ngIf="properties.length > 0">
+    <h2> Featured Properties</h2>
+    <div class="property-list">
+      <div class="property-card" *ngFor="let property of properties">
+        <img [src]="property.image" alt="Property Image">
+        <h3>{{ property.title }}</h3>
+        <p>💰 Price: ${{ property.price }}</p>
+      </div>
+    </div>
+  </section>
+  
