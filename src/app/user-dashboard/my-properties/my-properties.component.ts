@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-my-properties',
   imports: [CommonModule],
@@ -8,12 +9,12 @@ import { CommonModule } from '@angular/common';
 })
 export class MyPropertiesComponent {
   properties = [
-    { id: 1, title: 'Property in cairo', price: 50000, image: 'assets/house1.jpg' },
-    { id: 2, title: 'Property in Alexandria', price: 120000, image: 'assets/house2.jpg' }
+    { id: 1, title: 'عقار في القاهرة', price: 50000, image: 'assets/house1.jpg' },
+    { id: 2, title: 'عقار في الإسكندرية', price: 120000, image: 'assets/house2.jpg' }
   ];
 
   editProperty(id: number) {
-    alert('Edit Property: ' + id);
+    alert('تعديل العقار: ' + id);
   }
 
   deleteProperty(id: number) {

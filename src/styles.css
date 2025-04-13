@@ -21,7 +21,7 @@
 body {
   font-family: system-ui;
   overflow-x: hidden;
-  direction: ltr;
+  direction: rtl;
 }
 ul {
   list-style: none;

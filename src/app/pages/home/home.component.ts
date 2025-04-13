@@ -10,9 +10,9 @@ import { WhyChooseUsComponent } from "../../components/why-choose-us/why-choose-
 import { SearchBarComponent } from "../../components/search-bar/search-bar.component";
 import { CtaButtonComponent } from "../../components/cta-button/cta-button.component";
 import { CarouselComponent } from "../../components/carousel/carousel.component";
+import { ContactFormComponent } from "../../components/contact-form/contact-form.component";
 
 // استيراد المكونات
-
 
 @Component({
   selector: 'app-home',
@@ -26,8 +26,9 @@ import { CarouselComponent } from "../../components/carousel/carousel.component"
     WhyChooseUsComponent,
     SearchBarComponent,
     CtaButtonComponent,
-    CarouselComponent
-],
+    CarouselComponent,
+    ContactFormComponent
+  ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -37,35 +38,35 @@ export class HomeComponent implements AfterViewInit {
   // كل العقارات
   properties = [
     {
-      title: 'Luxury Villa',
+      title: 'فيلا فاخرة',
       price: 500000,
-      category: 'Villas',
+      category: 'فلل',
       image: 'assets/villa.jpg',
       lat: 30.0444,
       lng: 31.2357
     },
     {
-      title: 'Modern Apartment',
+      title: 'شقة حديثة',
       price: 150000,
-      category: 'Apartments',
+      category: 'شقق',
       image: 'assets/apartment.jpg',
       lat: 30.0500,
       lng: 31.2400
     },
     {
-      title: 'Office Space',
+      title: 'مساحة مكتبية',
       price: 300000,
-      category: 'Commercial Offices',
+      category: 'مكاتب تجارية',
       image: 'assets/office.jpg',
       lat: 30.0600,
       lng: 31.2300
     }
   ];
 
-  // هذه المتغيرات اللي راح تتغير وقت البحث أو التصنيف
+  // هذه المتغيرات التي ستتغير عند البحث أو التصنيف
   filteredProperties = [...this.properties];
 
-  categories = ['Apartments', 'Villas', 'Lands', 'Commercial Offices'];
+  categories = ['شقق', 'فلل', 'أراضٍ', 'مكاتب تجارية'];
 
   ngAfterViewInit(): void {
     // الخرائط تشتغل من خلال المكون المنفصل PropertyMapComponent

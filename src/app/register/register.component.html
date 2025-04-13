@@ -1,77 +1,76 @@
 <div class="register-wrapper">
   <div class="register-box">
-    <h2>✨ Create Your Account</h2>
+    <h2>✨ أنشئ حسابك</h2>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="form-grid">
 
         <div class="form-group">
-          <input type="text" formControlName="username" placeholder="Username" />
+          <input type="text" formControlName="username" placeholder="اسم المستخدم" />
           <div *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid" class="error">
-            Username is required.
+            اسم المستخدم مطلوب.
           </div>
         </div>
 
         <div class="form-group">
-          <input type="text" formControlName="nationalId" placeholder="National ID" />
+          <input type="text" formControlName="nationalId" placeholder="الرقم القومي" />
           <div *ngIf="registerForm.get('nationalId')?.touched && registerForm.get('nationalId')?.invalid" class="error">
-            National ID must be a valid number.
+            الرقم القومي يجب أن يكون رقماً صالحاً.
           </div>
         </div>
 
         <div class="form-group">
-          <input type="email" formControlName="email" placeholder="Email" />
+          <input type="email" formControlName="email" placeholder="البريد الإلكتروني" />
           <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid" class="error">
-            Valid email is required.
+            البريد الإلكتروني صالح مطلوب.
           </div>
         </div>
 
         <div class="form-group">
-          <input type="password" formControlName="password" placeholder="Password" />
+          <input type="password" formControlName="password" placeholder="كلمة المرور" />
           <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid" class="error">
-            At least 6 characters required.
+            يجب أن تكون كلمة المرور مكونة من 6 أحرف على الأقل.
           </div>
         </div>
 
         <div class="form-group">
-          <label for="gender">Gender</label>
+          <label for="gender">الجنس</label>
           <select id="gender" formControlName="gender">
-            <option value="">Select Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
+            <option value="">اختر الجنس</option>
+            <option value="Male">ذكر</option>
+            <option value="Female">أنثى</option>
           </select>
         </div>
-        
 
         <div class="form-group">
-          <input type="number" formControlName="age" placeholder="Age" />
+          <input type="number" formControlName="age" placeholder="العمر" />
           <div *ngIf="registerForm.get('age')?.touched && registerForm.get('age')?.invalid" class="error">
-            Age must be 1-100.
+            العمر يجب أن يكون بين 1 و 100.
           </div>
         </div>
 
         <div class="form-group">
-          <input type="text" formControlName="phone" placeholder="Phone" />
+          <input type="text" formControlName="phone" placeholder="رقم الهاتف" />
           <div *ngIf="registerForm.get('phone')?.touched && registerForm.get('phone')?.invalid" class="error">
-            Phone must be 10-15 digits.
+            رقم الهاتف يجب أن يكون من 10 إلى 15 رقم.
           </div>
         </div>
 
         <div class="form-group">
-          <input type="text" formControlName="usertype" placeholder="User Type" />
+          <input type="text" formControlName="userType" placeholder="نوع المستخدم" />
           <div *ngIf="registerForm.get('usertype')?.touched && registerForm.get('usertype')?.invalid" class="error">
-            User type is required.
+            نوع المستخدم مطلوب.
           </div>
         </div>
 
         <div class="form-group full-width">
-          <input type="text" formControlName="address" placeholder="Address" />
+          <input type="text" formControlName="address" placeholder="العنوان" />
           <div *ngIf="registerForm.get('address')?.touched && registerForm.get('address')?.invalid" class="error">
-            Address is required.
+            العنوان مطلوب.
           </div>
         </div>
       </div>
 
-      <button type="submit" [disabled]="registerForm.invalid">Register</button>
+      <button type="submit" [disabled]="registerForm.invalid">تسجيل</button>
     </form>
   </div>
 </div>

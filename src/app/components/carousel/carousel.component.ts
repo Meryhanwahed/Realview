@@ -1,32 +1,24 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, AfterViewInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
+declare var $: any; // To allow the use of jQuery
+
 @Component({
   selector: 'app-carousel',
-  imports:[CommonModule],
+  imports: [RouterModule],
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.css']
 })
-export class CarouselComponent {
-  images = [
-    { src: 'assets/images/carousal/1.jpg', alt: 'Image 1' },
-    { src: 'assets/images/carousal/2.jpg', alt: 'Image 2' },
-    { src: 'assets/images/carousal/3.jpg', alt: 'Image 3' },
-  ];
-  currentIndex: number = 0;
-
-  nextImage() {
-    if (this.currentIndex < this.images.length - 1) {
-      this.currentIndex++;
-    } else {
-      this.currentIndex = 0;
-    }
-  }
-
-  prevImage() {
-    if (this.currentIndex > 0) {
-      this.currentIndex--;
-    } else {
-      this.currentIndex = this.images.length - 1;
-    }
+export class CarouselComponent implements AfterViewInit {
+  ngAfterViewInit(): void {
+    // This code runs after the view has initialized, ensuring the DOM is ready for jQuery.
+    $(document).ready(function () {
+      // Initialize the hero slick slider
+      $('.hero-slick').slick({
+        autoplay: true,
+        autoplaySpeed: 4000,
+        rtl: true,
+        arrows: true,
+      });
+    });
   }
 }

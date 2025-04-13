@@ -1,12 +1,25 @@
-<div class="carousel-container">
-    <div class="carousel" [style.transform]="'translateX(' + (-100 * currentIndex) + '%)'">
-      <div *ngFor="let image of images" class="carousel-slide">
-        <img [src]="image.src" [alt]="image.alt" class="carousel-image">
-      </div>
-    </div>
-  
-    <!-- Prev and Next buttons -->
-    <button class="prev-btn" (click)="prevImage()">❮</button>
-    <button class="next-btn" (click)="nextImage()">❯</button>
+<section class="hero" id="hero">
+  <div class="hero-slick">
+    <img
+      src="assets/images/carousal/1.jpg"
+      alt="hero 1"
+      loading="lazy"
+    />
+    <img
+      src="assets/images/carousal/2.jpg"
+      alt="hero 2"
+      loading="lazy"
+    />
+    <img
+      src="assets/images/carousal/3.jpg"
+      alt="hero 3"
+      loading="lazy"
+    />
   </div>
-  
+
+  <div class="text">
+    <h2>مرحباً بكم في مسكن!</h2>
+    <p>مسكن – بوابتك لحلول عقارية ذكية</p>
+    <a routerLink="register" class="btn">انضم إلينا</a>
+  </div>
+</section>

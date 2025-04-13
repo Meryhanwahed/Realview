@@ -12,6 +12,9 @@ import { AddPropertyComponent } from './add-property/add-property.component';
 import { PropertiesPageComponent } from './properties/properties.component';
 import { PropertyDetailsComponent } from './pages/property-details/property-details.component';
 import { HomeComponent } from './pages/home/home.component';
+import { authGuard } from './guards/auth.guard';
+import { guestGuard } from './guards/guest.guard';
+
 export const routes: Routes = [
   {
     path: 'property-details/:id',
@@ -24,17 +27,10 @@ export const routes: Routes = [
   
   { path: 'add-property', component: AddPropertyComponent },
   {
-    path: '',
-    component: HomeComponent,
-  },
-  {
      path: 'page-not-found', 
      component: PageNotFoundComponent,
      }, // 404 Page
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
+
   {
     path: 'register',
     component: RegisterComponent,
@@ -58,6 +54,25 @@ export const routes: Routes = [
   {
     path:'contact-requests',
     component: ContactRequestsComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [guestGuard]  // ✅ يمنع الدخول للمسجلين مسبقًا
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [authGuard]  // ✅ يمنع الزوار غير المسجلين
+  },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: 'home'
   }
 ];
 

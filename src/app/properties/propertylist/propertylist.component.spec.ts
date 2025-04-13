@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PropertylistComponent } from './propertylist.component';
+import { PropertyListComponent } from './propertylist.component';
 
 describe('PropertylistComponent', () => {
-  let component: PropertylistComponent;
-  let fixture: ComponentFixture<PropertylistComponent>;
+  let component: PropertyListComponent;
+  let fixture: ComponentFixture<PropertyListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PropertylistComponent]
+      imports: [PropertyListComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PropertylistComponent);
+    fixture = TestBed.createComponent(PropertyListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
