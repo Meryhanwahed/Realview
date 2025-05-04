@@ -1,25 +1,10 @@
-<section class="why-us">
-  <h2> لماذا تختارنا؟</h2>
-  <div class="reasons">
-    <div class="reason-card">
-      <span class="icon">🔍</span>
-      <p>بحث وفلترة سهلة</p>
+<div class="counters-section">
+  <div class="counter" *ngFor="let item of counters">
+    <div class="icon-container">
+      <i class="fa" [ngClass]="item.icon"></i>
     </div>
-    <div class="reason-card">
-      <span class="icon">⚡</span>
-      <p>سرعة التحميل والأداء</p>
-    </div>
-    <div class="reason-card">
-      <span class="icon">📱</span>
-      <p>متجاوب وصديق للموبايل</p>
-    </div>
-    <div class="reason-card">
-      <span class="icon">🗺️</span>
-      <p>خرائط تفاعلية للعقارات</p>
-    </div>
-    <div class="reason-card">
-      <span class="icon">👨‍💼</span>
-      <p>موثوق من قبل وكلاء العقارات</p>
-    </div>
+    <h2 class="number">{{ item.number }}</h2>
+    <p class="title">{{ item.title }}</p>
+    <p class="description">{{ item.description }}</p>
   </div>
-</section>
+</div>

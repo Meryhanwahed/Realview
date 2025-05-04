@@ -1,54 +1,83 @@
-.why-us {
-  background: linear-gradient(to right, #e0f7fa, #fefefe);
-  padding: 60px 20px;
-  border-radius: 16px;
-  margin: 50px 0;
-  text-align: center;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-}
-
-.why-us h2 {
-  font-size: 32px;
-  margin-bottom: 40px;
-  color: #333;
-  font-weight: bold;
-}
-
-.reasons {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 25px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.reason-card {
-  background-color: white;
-  padding: 30px 20px;
-  border-radius: 12px;
-  border: 1px solid #e0e0e0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-  transition: all 0.3s ease;
+/* تحسين مظهر القسم */
+.counters-section {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 3rem 1rem;
+  background-color: #f9fafb;
 }
 
-.reason-card:hover {
-  transform: translateY(-5px);
-  background-color: #f0f8ff;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+.counter {
+  text-align: center;
+  margin: 2rem;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+  background-color: white;
+  width: 250px;
+  height: 300px;
 }
 
-.reason-card .icon {
-  font-size: 36px;
-  margin-bottom: 15px;
-  color: var(--main-color);
+.counter:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-.reason-card p {
-  font-size: 16px;
-  color: #444;
-  font-weight: 500;
-  margin: 0;
+/* تحسين الأرقام */
+.number {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #d2691e;
+  animation: fadeIn 1s ease-out;
 }
+
+/* تحسين العناوين */
+.title {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  color: #333;
+  animation: fadeIn 1s ease-out;
+}
+
+/* تحسين الوصف */
+.description {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 1rem;
+  animation: fadeIn 1s ease-out;
+}
+
+/* إضافة الأنيميشن للظهور */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* تحسين الأيقونات */
+.icon-container {
+  font-size: 3rem;
+  color: #d2691e;
+  margin-bottom: 1rem;
+  animation: bounce 1.5s infinite;
+}
+
+/* حركة الأيقونات */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* تضمين FontAwesome */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');

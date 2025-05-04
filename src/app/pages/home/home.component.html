@@ -1,14 +1,11 @@
-<app-search-bar (search)="onSearch($event)"></app-search-bar>
 <app-carousel></app-carousel>
+<app-home-about></app-home-about>
+<app-latest-properties></app-latest-properties>
 
-<app-featured-properties [properties]="filteredProperties"></app-featured-properties>
-<app-property-categories
-  [categories]="categories"
-  (categorySelected)="onCategorySelected($event)"
-></app-property-categories>
 
 <app-why-choose-us></app-why-choose-us>
 
-<app-cta-button></app-cta-button>
 <app-contact-form></app-contact-form>
+<app-cta-button></app-cta-button>
+
 <!--<app-property-map [properties]="filteredProperties"></app-property-map>-->

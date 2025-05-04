@@ -7,10 +7,11 @@ import { PropertyMapComponent } from "../../components/property-map/property-map
 import { FeaturedPropertiesComponent } from "../../components/featured-properties/featured-properties.component";
 import { PropertyCategoriesComponent } from "../../components/property-categories/property-categories.component";
 import { WhyChooseUsComponent } from "../../components/why-choose-us/why-choose-us.component";
-import { SearchBarComponent } from "../../components/search-bar/search-bar.component";
 import { CtaButtonComponent } from "../../components/cta-button/cta-button.component";
 import { CarouselComponent } from "../../components/carousel/carousel.component";
 import { ContactFormComponent } from "../../components/contact-form/contact-form.component";
+import { LatestPropertiesComponent } from "../../components/latest-properties/latest-properties.component";
+import { HomeAboutComponent } from "../../components/home-about/home-about.component";
 
 // استيراد المكونات
 
@@ -21,14 +22,13 @@ import { ContactFormComponent } from "../../components/contact-form/contact-form
     CommonModule,
     FormsModule,
     RouterModule,
-    FeaturedPropertiesComponent,
-    PropertyCategoriesComponent,
     WhyChooseUsComponent,
-    SearchBarComponent,
     CtaButtonComponent,
     CarouselComponent,
-    ContactFormComponent
-  ],
+    ContactFormComponent,
+    LatestPropertiesComponent,
+    HomeAboutComponent
+],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

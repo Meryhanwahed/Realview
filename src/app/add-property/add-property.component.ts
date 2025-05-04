@@ -1,57 +1,103 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-property',
-  imports: [CommonModule , RouterModule, ReactiveFormsModule],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './add-property.component.html',
-  styleUrl: './add-property.component.css'
+  styleUrls: ['./add-property.component.css']
 })
 export class AddPropertyComponent {
   propertyForm: FormGroup;
-  images: File[] = [];
+  selectedImages: File[] = [];
+  imagePreviews: string[] = [];
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router
+  ) {
     this.propertyForm = this.fb.group({
       title: ['', Validators.required],
-      type: ['', Validators.required],
-      price: ['', [Validators.required, Validators.min(1)]],
       location: ['', Validators.required],
-      latitude: ['', Validators.required],
-      longitude: ['', Validators.required],
       description: ['', Validators.required],
-      images: [null]
+      price: ['', Validators.required],
+      rooms: ['', Validators.required],
+      bathrooms: ['', Validators.required],
+      area: ['', Validators.required],
+      status: ['Available', Validators.required],
+      purpose: ['Sale', Validators.required],
+      availabFrom: ['', Validators.required],
+      mapLink: ['']
     });
   }
 
-  onImageUpload(event: any) {
-    if (event.target.files.length > 0) {
-      this.images = Array.from(event.target.files);
+  onImageChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      this.selectedImages = Array.from(input.files);
+      this.previewImages(this.selectedImages);
     }
   }
 
-  submitProperty() {
-    if (this.propertyForm.valid) {
-      const formData = new FormData();
-      formData.append('title', this.propertyForm.get('title')?.value);
-      formData.append('type', this.propertyForm.get('type')?.value);
-      formData.append('price', this.propertyForm.get('price')?.value);
-      formData.append('location', this.propertyForm.get('location')?.value);
-      formData.append('latitude', this.propertyForm.get('latitude')?.value);
-      formData.append('longitude', this.propertyForm.get('longitude')?.value);
-      formData.append('description', this.propertyForm.get('description')?.value);
-      
-      this.images.forEach((image, index) => {
-        formData.append(`images[${index}]`, image);
-      });
+  previewImages(files: File[]) {
+    this.imagePreviews = [];
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.imagePreviews.push(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
 
-      console.log('Property Data:', formData);
-      // إرسال البيانات إلى السيرفر باستخدام HTTP Client
-    } else {
-      alert('Please fill in all required fields');
+  submitForm() {
+    if (this.propertyForm.invalid) {
+      alert('يرجى ملء جميع الحقول المطلوبة.');
+      return;
     }
+
+    const formData = new FormData();
+    const values = this.propertyForm.value;
+
+    formData.append('title', values.title);
+    formData.append('location', values.location);
+    formData.append('description', values.description);
+    formData.append('price', values.price);
+    formData.append('rooms', values.rooms);
+    formData.append('bathrooms', values.bathrooms);
+    formData.append('area', values.area);
+    formData.append('status', values.status);
+    formData.append('purpose', values.purpose);
+    formData.append('availabFrom', values.availabFrom);
+    formData.append('mapLink', values.mapLink);
+
+    this.selectedImages.forEach((file) => {
+      formData.append('images', file);
+    });
+
+    const headers = new HttpHeaders({
+      token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2UxYmRhMzcxYjJlMjM2OTI1ZGI2NzMiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInVzZXJOYW1lIjoiQWRtaW4iLCJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3NDYxNDIxMTh9.dI9iqYx0tKID7fNstDEy4Yj83DzX2TP-S46PJ_YNnR0' // ← عدّلي التوكن الحقيقي هنا
+    });
+
+    this.http.post(
+      'https://gradution-project-silk.vercel.app/properties/add?categoryId=67e45d9b6b1d08da665bce55&subCategoryId=67e45e4a6b1d08da665bce66',
+      formData,
+      { headers }
+    ).subscribe({
+      next: () => {
+        // إعادة توجيه لصفحة التأكيد بعد نجاح الإضافة
+        this.router.navigate(['/success']);
+      },
+      error: (err) => {
+        console.error(err);
+        alert('❌ فشل في الإضافة: ' + err.message);
+      }
+    });
   }
 }

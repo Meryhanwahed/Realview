@@ -1,0 +1,72 @@
+.profile-container {
+    display: flex;
+    font-family: 'Cairo', sans-serif;
+  }
+  
+  .sidebar {
+    width: 200px;
+    background: #f2f2f2;
+    padding: 1rem;
+    border-left: 1px solid #ccc;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar li {
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 2rem;
+  }
+  
+  .title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #2e7d32;
+  }
+  
+  .icon-container {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #555;
+  }
+  
+  .form-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .btn-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+  
+  button {
+    padding: 0.6rem 1.5rem;
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  button.cancel {
+    background-color: #ccc;
+    color: #000;
+  }
+  

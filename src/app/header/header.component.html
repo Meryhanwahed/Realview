@@ -1,67 +1,81 @@
 <header>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary position-fixed w-100 z-3">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary position-fixed w-100 z-3 shadow-sm">
     <div class="container-fluid">
       <!-- الشعار -->
-      <a class="navbar-brand" routerLink="/">
-        <img src="assets/images/logo.jpg" alt="شعار الموقع" width="70px" />
+      <a class="navbar-brand" routerLink="/" aria-label="الصفحة الرئيسية">
+        <img src="assets/images/logo.jpg" alt="شعار الموقع" width="70" height="70" />
       </a>
 
-      <!-- زر القائمة في الشاشات الصغيرة -->
+      <!-- زر القائمة للشاشات الصغيرة -->
       <button
         class="navbar-toggler"
         type="button"
         data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
+        data-bs-target="#navbarContent"
+        aria-controls="navbarContent"
         aria-expanded="false"
-        aria-label="تبديل التنقل"
+        aria-label="فتح أو إغلاق القائمة"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <!-- روابط التنقل -->
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-          <!-- الرئيسية -->
           <li class="nav-item">
-            <a class="nav-link" routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
-              الرئيسية
-            </a>
+            <a class="nav-link" routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">الرئيسية</a>
           </li>
-
-          <!-- من نحن -->
           <li class="nav-item">
-            <a class="nav-link" routerLink="/about" routerLinkActive="active-link">
-              من نحن
-            </a>
+            <a class="nav-link" routerLink="/about" routerLinkActive="active-link">من نحن</a>
           </li>
-
-          <!-- العقارات -->
           <li class="nav-item">
-            <a class="nav-link" routerLink="/properties" routerLinkActive="active-link">
-              العقارات
-            </a>
+            <a class="nav-link" routerLink="/latest-sale-properties" routerLinkActive="active-link">عقارات للبيع</a>
           </li>
-
-          <!-- عقاراتي -->
           <li class="nav-item">
-            <a class="nav-link" routerLink="/my-properties" routerLinkActive="active-link">
-              عقاراتي
-            </a>
+            <a class="nav-link" routerLink="/latest-rent-properties" routerLinkActive="active-link">عقارات للإيجار</a>
           </li>
-
-          <!-- لوحة التحكم -->
           <li class="nav-item">
-            <a class="nav-link" routerLink="/user-dashboard" routerLinkActive="active-link">
-              لوحة التحكم
-            </a>
+            <a class="nav-link" routerLink="/price-guide" routerLinkActive="active-link">دليل الأسعار</a>
+          </li>
+          <li class="nav-item" *ngIf="isLoggedIn">
+            <a class="nav-link" routerLink="/my-properties" routerLinkActive="active-link">عقاراتي</a>
+          </li>
+        <!---->  <li class="nav-item" *ngIf="isLoggedIn">
+            <a class="nav-link" routerLink="/user-dashboard" routerLinkActive="active-link">المستخدم</a>
           </li>
         </ul>
 
-        <!-- زر تسجيل الدخول -->
-        <a class="btn btn-primary ms-3 px-4 py-2" routerLink="/login" routerLinkActive="active-link" aria-label="تسجيل الدخول">
-          تسجيل الدخول
-        </a>
+        <!-- أيقونة المستخدم أو زر تسجيل الدخول -->
+        <div class="d-flex align-items-center">
+
+          <!-- إذا كان المستخدم مسجل دخول -->
+          <ng-container *ngIf="isLoggedIn; else loginTemplate">
+            <div class="position-relative">
+              <i
+                class="bi bi-person-circle fs-3 user-icon"
+                role="button"
+                title="قائمة المستخدم"
+                aria-label="فتح قائمة المستخدم"
+                [attr.aria-expanded]="showDropdown"
+                (click)="toggleDropdown()"
+              ></i>
+
+              <!-- القائمة المنسدلة -->
+              <div *ngIf="showDropdown" class="dropdown-menu-custom user-dropdown mt-2 p-2 shadow rounded bg-white text-end">
+                <span class="dropdown-item-text d-block mb-2">مرحبًا، {{ user.name }}</span>
+                <a class="dropdown-item" routerLink="/user-dashboard">لوحة التحكم</a>
+                <button class="dropdown-item text-danger" (click)="logout()">تسجيل الخروج</button>
+              </div>
+            </div>
+          </ng-container>
+
+          <!-- إذا لم يكن مسجل دخول -->
+          <ng-template #loginTemplate>
+            <a class="btn btn-primary ms-3 px-4 py-2" routerLink="/login" aria-label="تسجيل الدخول">
+              تسجيل الدخول
+            </a>
+          </ng-template>
+        </div>
       </div>
     </div>
   </nav>

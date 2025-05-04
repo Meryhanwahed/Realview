@@ -14,8 +14,29 @@ import { PropertyDetailsComponent } from './pages/property-details/property-deta
 import { HomeComponent } from './pages/home/home.component';
 import { authGuard } from './guards/auth.guard';
 import { guestGuard } from './guards/guest.guard';
-
+import { LatestPropertiesComponent } from './components/latest-properties/latest-properties.component';
+import { ConfirmSuccessComponent } from './components/confirm-success/confirm-success.component';
+import { EditPropertyComponent } from './components/edit-property/edit-property.component';
+import { LatestSalePropertiesComponent } from './components/latest-sale-properties/latest-sale-properties.component';
+import { LatestRentPropertiesComponent } from './components/latest-rent-properties/latest-rent-properties.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { PriceGuideComponent } from './price-guide/price-guide.component';
 export const routes: Routes = [
+
+  { path: 'property/:id', component: PropertyDetailsComponent },
+
+  {path: 'price-guide',component :PriceGuideComponent},
+  {path: 'user-profile',component :UserProfileComponent},
+  {path: 'latest-sale-properties',component :LatestSalePropertiesComponent},
+  {path: 'latest-rent-properties',component :LatestRentPropertiesComponent},
+  { path: 'edit-property/:id', component: EditPropertyComponent },
+
+  { path: 'success', component: ConfirmSuccessComponent },
+
+  {
+    path: 'latest-properties/:id',
+    component: LatestPropertiesComponent
+  },
   {
     path: 'property-details/:id',
     component: PropertyDetailsComponent
@@ -63,7 +84,7 @@ export const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [authGuard]  // ✅ يمنع الزوار غير المسجلين
+   // canActivate: [authGuard]  // ✅ يمنع الزوار غير المسجلين
   },
   {
     path: '',

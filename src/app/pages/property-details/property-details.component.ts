@@ -1,49 +1,72 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { PropertyCarouselComponent } from '../../components/property-carousel/property-carousel.component';
-import { PropertyMapComponent } from '../../components/property-map/property-map.component';
-import { PropertyInfoComponent } from '../../components/property-info/property-info.component';
-import { PropertyDescriptionComponent } from '../../components/property-description/property-description.component';
-import { ContactFormComponent } from '../../components/contact-form/contact-form.component';
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { NgIf, NgFor, DecimalPipe, DatePipe } from '@angular/common';
+import { PropertyService } from '../../services/property.service';
+import { Property } from '../../models/property';
+import { HttpClient } from '@angular/common/http'; // لاستدعاء API
 
 @Component({
   selector: 'app-property-details',
   standalone: true,
-  imports: [
-    CommonModule,
-    PropertyCarouselComponent,
-    PropertyMapComponent,
-    PropertyInfoComponent,
-    PropertyDescriptionComponent,
-    ContactFormComponent,
-  ],
+  imports: [CommonModule, NgIf, NgFor, DecimalPipe, DatePipe],
   templateUrl: './property-details.component.html',
   styleUrls: ['./property-details.component.css']
 })
 export class PropertyDetailsComponent implements OnInit {
-  propertyId!: number;
+  property?: Property;
+  message?: string;
 
-  // ✅ إضافة المتغير المطلوب لتفادي الخطأ
-  filteredProperties: any[] = [];
+  constructor(
+    private route: ActivatedRoute,
+    private propertyService: PropertyService,
+    private sanitizer: DomSanitizer,
+    private http: HttpClient // لعمل الطلبات إلى الـ API
+  ) {}
 
-  constructor(private route: ActivatedRoute) {}
+  ngOnInit(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.propertyService.getPropertyById(id).subscribe(data => {
+      this.property = data;
+    });
+  }
 
-  ngOnInit() {
-    // استخراج ID من الرابط
-    this.propertyId = Number(this.route.snapshot.paramMap.get('id'));
-    console.log('Property ID:', this.propertyId);
+  // دالة لإضافة العقار إلى المفضلة
+  addToFavorites(): void {
+    if (this.property) {
+      // إرسال طلب إلى الـ API لإضافة العقار إلى المفضلة
+      this.http.post('https://api.example.com/favorites', { propertyId: this.property.id })
+        .subscribe(response => {
+          alert('تم إضافة العقار إلى المفضلة');
+        }, error => {
+          alert('حدث خطأ أثناء إضافة العقار إلى المفضلة');
+        });
+    }
+  }
 
-    // مثال مبدئي على تعبئة filteredProperties (يمكنك استبداله لاحقًا ببيانات فعلية من API أو Service)
-    this.filteredProperties = [
-      {
-        id: 1,
-        title: 'Test Property',
-        price: 100000,
-        location: 'Test Location',
-        description: 'This is just a demo property.',
-        image: 'assets/villa.jpg'
-      }
-    ].filter(p => p.id === this.propertyId);
+  // دالة لعرض رابط الخريطة بعد التحقق من الموقع
+  get mapUrl(): SafeResourceUrl {
+    const location = this.property?.location ?? '';
+    return this.sanitizer.bypassSecurityTrustResourceUrl(
+      `https://www.google.com/maps?q=${location}&output=embed`
+    );
+  }
+
+  // دالة لعرض رسالة عند الضغط على الأزرار
+  showMessage(type: string): void {
+    switch (type) {
+      case 'واتس آب':
+        this.message = `يمكنك التواصل عبر واتس آب على الرقم 01012345678`;
+        break;
+      case 'اتصال':
+        this.message = `اتصل بنا على الرقم 01012345678`;
+        break;
+      case 'مشاركة':
+        this.message = `تم مشاركة العقار معك`;
+        break;
+      default:
+        this.message = '';
+    }
   }
 }

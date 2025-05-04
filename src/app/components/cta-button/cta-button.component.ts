@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
-
 @Component({
   selector: 'app-cta-button',
   standalone: true,
@@ -9,4 +9,10 @@ import { RouterModule } from '@angular/router';
   templateUrl: './cta-button.component.html',
   styleUrls: ['./cta-button.component.css']
 })
-export class CtaButtonComponent {}
+export class CtaButtonComponent {
+  constructor(private router: Router) {}
+
+  navigateToAddProperty() {
+    this.router.navigate(['/add-property']); // مسار صفحة إضافة عقار
+  }
+}
