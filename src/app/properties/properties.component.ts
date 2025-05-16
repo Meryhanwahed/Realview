@@ -2,12 +2,10 @@ import { Component } from '@angular/core';
 import { PropertyService } from '../services/property.service';
 import { Property } from '../models/property';
 import { OnInit } from '@angular/core';
-import { PropertyFilterComponent } from "./propertyfilter/propertyfilter.component";
 import { MapViewComponent } from "./mapview/mapview.component";
-import { PropertyListComponent } from "./propertylist/propertylist.component";
 @Component({
   selector: 'app-properties',
-  imports: [ MapViewComponent, PropertyListComponent],
+  imports: [ MapViewComponent, ],
   templateUrl: './properties.component.html',
   styleUrl: './properties.component.css'
 })

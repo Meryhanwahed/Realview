@@ -1,3 +1,5 @@
+// src/app/components/property-details/property-details.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -5,8 +7,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { NgIf, NgFor, DecimalPipe, DatePipe } from '@angular/common';
 import { PropertyService } from '../../services/property.service';
 import { Property } from '../../models/property';
-import { HttpClient } from '@angular/common/http'; // لاستدعاء API
-
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-property-details',
   standalone: true,
@@ -22,38 +23,46 @@ export class PropertyDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private propertyService: PropertyService,
     private sanitizer: DomSanitizer,
-    private http: HttpClient // لعمل الطلبات إلى الـ API
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.propertyService.getPropertyById(id).subscribe(data => {
-      this.property = data;
+    const idParam = this.route.snapshot.paramMap.get('id');
+    const id = idParam ? idParam.trim() : null;
+
+    if (!id) {
+      console.error('المعرف غير موجود في الرابط');
+      return;
+    }
+
+    this.propertyService.getPropertyById(id).subscribe({
+      next: (response) => {
+        this.property = response.data;
+      },
+      error: (err) => {
+        console.error('فشل في جلب بيانات العقار:', err);
+      }
     });
   }
 
-  // دالة لإضافة العقار إلى المفضلة
   addToFavorites(): void {
     if (this.property) {
-      // إرسال طلب إلى الـ API لإضافة العقار إلى المفضلة
-      this.http.post('https://api.example.com/favorites', { propertyId: this.property.id })
-        .subscribe(response => {
-          alert('تم إضافة العقار إلى المفضلة');
-        }, error => {
-          alert('حدث خطأ أثناء إضافة العقار إلى المفضلة');
-        });
+      this.http.post(`https://gradution-project-silk.vercel.app/cart/add/67e45ee86b1d08da665bce6e`, {
+        propertyId: this.property._id
+      }).subscribe({
+        next: () => alert('تم إضافة العقار إلى المفضلة'),
+        error: () => alert('حدث خطأ أثناء إضافة العقار إلى المفضلة')
+      });
     }
   }
 
-  // دالة لعرض رابط الخريطة بعد التحقق من الموقع
   get mapUrl(): SafeResourceUrl {
     const location = this.property?.location ?? '';
     return this.sanitizer.bypassSecurityTrustResourceUrl(
-      `https://www.google.com/maps?q=${location}&output=embed`
+      `https://www.google.com/maps?q=${encodeURIComponent(location)}&output=embed`
     );
   }
 
-  // دالة لعرض رسالة عند الضغط على الأزرار
   showMessage(type: string): void {
     switch (type) {
       case 'واتس آب':

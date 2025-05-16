@@ -18,7 +18,7 @@
   
     <div class="properties-grid">
       <div class="property-card" *ngFor="let property of properties">
-        <img [src]="property.images[0]" alt="صورة العقار" />
+        <img [src]="property.images.URLs[0].secure_url" alt="صورة العقار" />
         <div class="property-details">
           <h3>{{ property.title }}</h3>
           <p>{{ property.description }}</p>

@@ -16,9 +16,15 @@ export class HeaderComponent implements OnInit {
   user: { name?: string } = {};
   showDropdown = false;
 
+  // ✅ التوكن من الـ localStorage
+  token: string | null = null;
+
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
+    // تحديث التوكن عند تحميل الهيدر
+    this.token = localStorage.getItem('token');
+
     // الاستماع لتغييرات حالة تسجيل الدخول
     this.authService.isLoggedIn$.subscribe((status) => {
       this.isLoggedIn = status;

@@ -10,7 +10,6 @@ import { ContactRequestsComponent } from './user-dashboard/contact-requests/cont
 import { RouterModule} from '@angular/router';
 import { AddPropertyComponent } from './add-property/add-property.component';
 import { PropertiesPageComponent } from './properties/properties.component';
-import { PropertyDetailsComponent } from './pages/property-details/property-details.component';
 import { HomeComponent } from './pages/home/home.component';
 import { authGuard } from './guards/auth.guard';
 import { guestGuard } from './guards/guest.guard';
@@ -21,9 +20,53 @@ import { LatestSalePropertiesComponent } from './components/latest-sale-properti
 import { LatestRentPropertiesComponent } from './components/latest-rent-properties/latest-rent-properties.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { PriceGuideComponent } from './price-guide/price-guide.component';
+import { ClientDashboardComponent } from './components/client-dashboard/client-dashboard.component';
+import{DashboardComponent} from './admin/dashboard/dashboard.component';
+import { UsersManagementComponent } from './admin/users-management/users-management.component';
+import { PostsManagementComponent } from './admin/posts-management/posts-management.component';
+import { AdminAuthGuard } from './admin/admin-auth.guard';
+import { AdminLoginComponent } from './admin/admin-login.component';
+import { ChangePasswordComponent } from './admin/change-password/change-password.component';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { PropertiesDetailsComponent } from './properties-details/properties-details.component';
 export const routes: Routes = [
+  {path:'property-details/:id', component:PropertiesDetailsComponent},
+  { path: 'auth/forgot-password', component: ForgotPasswordComponent },
+  { path: 'auth/reset-password', component: ResetPasswordComponent },
+  { path: 'admin/change-password', component: ChangePasswordComponent, canActivate: [AdminAuthGuard] },
 
-  { path: 'property/:id', component: PropertyDetailsComponent },
+  { path: 'admin-login', component: AdminLoginComponent },
+  { path: 'admin', component: DashboardComponent, canActivate: [AdminAuthGuard] },
+  { path: 'admin/users', component: UsersManagementComponent, canActivate: [AdminAuthGuard] },
+  { path: 'admin/posts', component: PostsManagementComponent, canActivate: [AdminAuthGuard] },
+  { path: 'admin', component: DashboardComponent },
+  { path: 'admin/users', component: UsersManagementComponent },
+  { path: 'admin/posts', component: PostsManagementComponent },
+  {
+    path: 'admin',
+    component: DashboardComponent,
+    children: [
+      
+      {
+        path: 'users',
+        loadComponent: () => import('./admin/users-management/users-management.component').then(m => m.UsersManagementComponent)
+      },
+      {
+        path: 'posts',
+        loadComponent: () => import('./admin/posts-management/posts-management.component').then(m => m.PostsManagementComponent)
+      },
+      {
+        path: '',
+        redirectTo: 'users',
+        pathMatch: 'full'
+      }
+    ]
+  },
+  {
+    path: 'client-dashboard',
+    component: ClientDashboardComponent
+  }, 
 
   {path: 'price-guide',component :PriceGuideComponent},
   {path: 'user-profile',component :UserProfileComponent},
@@ -37,10 +80,7 @@ export const routes: Routes = [
     path: 'latest-properties/:id',
     component: LatestPropertiesComponent
   },
-  {
-    path: 'property-details/:id',
-    component: PropertyDetailsComponent
-  },
+  
   {
     path: 'properties',
     component:PropertiesPageComponent

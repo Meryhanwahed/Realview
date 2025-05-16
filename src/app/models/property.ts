@@ -1,22 +1,21 @@
 export interface Property {
-  id: number;
-  title: string;
-  type: string;
-  price: number;
-  location: string;
+  _id: string;
+  area: number;
+  availabFrom: string;
+  bathrooms: number;
+  category: string;
+  createdAt: string;
   description: string;
   images: string[];
+  location: string;
+  price: number;
+  purpose: string;
   rooms: number;
-  bathrooms: number;
-  area: number;
-  purpose: 'sale' | 'rent';
+  status: string;
+  subCategory: string;
+  title: string;
+  updatedAt: string;
+  addedBy: string
+    features?: string[]; // ✅ أضف هذا السطر
 
-  // الحقول المضافة حسب الاستخدام في الكومبوننت
-  publishDate: string; // تاريخ نشر العقار
-  details: string;     // تفاصيل إضافية عن العقار
-  features: string[];  // قائمة المميزات (مثل تكييف، مصعد، إلخ)
-  owner: {
-    name: string;
-    joinedDate: string; // تاريخ انضمام المالك
-  };
 }

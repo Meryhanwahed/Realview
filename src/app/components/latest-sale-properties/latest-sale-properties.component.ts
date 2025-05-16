@@ -33,9 +33,14 @@ export class LatestSalePropertiesComponent implements  OnInit {
       ...(this.selectedLocation && { location: this.selectedLocation })
     };
 
-    this.http.get<any>('https://gradution-project-silk.vercel.app/properties/get/67ddab9c61d21e038766935a', { params }).subscribe({
+    const headers: any = {
+      token: `ahmedEhab ${localStorage.getItem('token')}`
+    }
+    this.http.get<any>(`https://gradution-project-silk.vercel.app/properties/list?purpose=Sale`, {headers}).subscribe({
       next: (res) => {
         this.properties = res.data;
+        console.log(res);
+        
       },
       error: (err) => {
         console.error('خطأ في جلب البيانات:', err);

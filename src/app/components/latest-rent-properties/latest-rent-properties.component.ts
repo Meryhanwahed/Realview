@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { PropertyService } from '../../services/property.service';
 import { RouterModule } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+
 @Component({
   selector: 'app-latest-rent-properties',
   standalone: true,
-  imports: [CommonModule, FormsModule,RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './latest-rent-properties.component.html',
   styleUrls: ['./latest-rent-properties.component.css']
 })
@@ -17,18 +18,36 @@ export class LatestRentPropertiesComponent implements OnInit {
 
   selectedType: string = '';
   selectedLocation: string = '';
+  page: number = 1;
 
-  constructor(private propertyService: PropertyService) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.fetchProperties();
   }
 
-  fetchProperties(): void {
-    this.propertyService.getRentProperties(this.selectedType, this.selectedLocation)
-    .subscribe({
-        next: (data) => this.properties = data,
-        error: (err) => console.error('فشل في تحميل العقارات:', err)
+  fetchProperties() {
+    const params: any = {
+      page: this.page,
+      limit: 8,
+      purpose: 'rent',
+      ...(this.selectedType && { type: this.selectedType }),
+      ...(this.selectedLocation && { location: this.selectedLocation })
+    };
+
+    const headers: any = {
+      token: `ahmedEhab ${localStorage.getItem('token')}`
+    };
+
+    this.http.get<any>('https://gradution-project-silk.vercel.app/properties/list?purpose=Rent', { headers })
+      .subscribe({
+        next: (res) => {
+          this.properties = res.data;
+          console.log("res", res);
+        },
+        error: (err) => {
+          console.error('خطأ في جلب البيانات:', err);
+        }
       });
   }
 }

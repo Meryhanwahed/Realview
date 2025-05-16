@@ -75,15 +75,14 @@ export class AddPropertyComponent {
     formData.append('status', values.status);
     formData.append('purpose', values.purpose);
     formData.append('availabFrom', values.availabFrom);
-    formData.append('mapLink', values.mapLink);
 
     this.selectedImages.forEach((file) => {
       formData.append('images', file);
     });
 
-    const headers = new HttpHeaders({
-      token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2UxYmRhMzcxYjJlMjM2OTI1ZGI2NzMiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInVzZXJOYW1lIjoiQWRtaW4iLCJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3NDYxNDIxMTh9.dI9iqYx0tKID7fNstDEy4Yj83DzX2TP-S46PJ_YNnR0' // ← عدّلي التوكن الحقيقي هنا
-    });
+    const headers = {
+      token: `ahmedEhab ${localStorage.getItem('token')}`
+    }
 
     this.http.post(
       'https://gradution-project-silk.vercel.app/properties/add?categoryId=67e45d9b6b1d08da665bce55&subCategoryId=67e45e4a6b1d08da665bce66',
@@ -91,7 +90,7 @@ export class AddPropertyComponent {
       { headers }
     ).subscribe({
       next: () => {
-        // إعادة توجيه لصفحة التأكيد بعد نجاح الإضافة
+
         this.router.navigate(['/success']);
       },
       error: (err) => {
