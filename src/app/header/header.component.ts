@@ -13,38 +13,79 @@ import { AuthService } from '../services/auth.service';
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn = false;
-  user: { name?: string } = {};
+  username: string = '';
   showDropdown = false;
-
-  // ✅ التوكن من الـ localStorage
-  token: string | null = null;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    // تحديث التوكن عند تحميل الهيدر
-    this.token = localStorage.getItem('token');
-
     // الاستماع لتغييرات حالة تسجيل الدخول
     this.authService.isLoggedIn$.subscribe((status) => {
       this.isLoggedIn = status;
-      this.user = this.authService.getUser() || {};
+      
+      if (status) {
+        this.updateUsername();
+      }
     });
+    
+    // تحقق من حالة تسجيل الدخول عند بدء التشغيل
+    this.isLoggedIn = this.authService.isLoggedIn();
+    if (this.isLoggedIn) {
+      this.updateUsername();
+    }
   }
 
-  toggleDropdown() {
+  // دالة مساعدة لتحديث اسم المستخدم من مصادر متعددة
+  updateUsername() {
+    // محاولة الحصول على اسم المستخدم مباشرة من localStorage
+    const usernameFromLS = localStorage.getItem('username');
+    
+    if (usernameFromLS) {
+      this.username = usernameFromLS;
+      return;
+    }
+    
+    // محاولة الحصول على اسم المستخدم من كائن المستخدم المخزن
+    try {
+      const userString = localStorage.getItem('user');
+      if (userString) {
+        const user = JSON.parse(userString);
+        if (user.username) {
+          this.username = user.username;
+          return;
+        }
+      }
+    } catch (e) {
+      console.error('خطأ في قراءة بيانات المستخدم:', e);
+    }
+    
+    // محاولة الحصول على اسم المستخدم من خلال خدمة المصادقة
+    const user = this.authService.getUser();
+    if (user && user.userName) {
+      this.username = user.userName;
+      return;
+    }
+    
+    // قيمة افتراضية إذا لم يتم العثور على اسم المستخدم
+    this.username = 'المستخدم';
+  }
+
+  toggleDropdown(event: Event) {
+    event.stopPropagation();
     this.showDropdown = !this.showDropdown;
   }
 
   logout() {
     this.authService.logout();
+    this.showDropdown = false;
+    localStorage.clear();
     this.router.navigate(['/login']);
   }
 
   @HostListener('document:click', ['$event'])
   handleClickOutside(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    if (!target.closest('.user-dropdown') && !target.closest('.user-icon')) {
+    if (!target.closest('.user-menu-container')) {
       this.showDropdown = false;
     }
   }
