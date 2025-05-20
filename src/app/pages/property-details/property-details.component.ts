@@ -1,59 +1,46 @@
 // src/app/components/property-details/property-details.component.ts
 
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { NgIf, NgFor, DecimalPipe, DatePipe } from '@angular/common';
-import { PropertyService } from '../../services/property.service';
-import { Property } from '../../models/property';
-import { HttpClient } from '@angular/common/http';
+import { NgIf, NgFor, DecimalPipe } from '@angular/common';
+
 @Component({
   selector: 'app-property-details',
   standalone: true,
-  imports: [CommonModule, NgIf, NgFor, DecimalPipe, DatePipe],
+  imports: [CommonModule, NgIf, NgFor, DecimalPipe],
   templateUrl: './property-details.component.html',
   styleUrls: ['./property-details.component.css']
 })
 export class PropertyDetailsComponent implements OnInit {
-  property?: Property;
+  property: any;
   message?: string;
 
-  constructor(
-    private route: ActivatedRoute,
-    private propertyService: PropertyService,
-    private sanitizer: DomSanitizer,
-    private http: HttpClient
-  ) {}
+  constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
-    const idParam = this.route.snapshot.paramMap.get('id');
-    const id = idParam ? idParam.trim() : null;
-
-    if (!id) {
-      console.error('المعرف غير موجود في الرابط');
-      return;
-    }
-
-    this.propertyService.getPropertyById(id).subscribe({
-      next: (response) => {
-        this.property = response.data;
-      },
-      error: (err) => {
-        console.error('فشل في جلب بيانات العقار:', err);
-      }
-    });
-  }
-
-  addToFavorites(): void {
-    if (this.property) {
-      this.http.post(`https://gradution-project-silk.vercel.app/cart/add/67e45ee86b1d08da665bce6e`, {
-        propertyId: this.property._id
-      }).subscribe({
-        next: () => alert('تم إضافة العقار إلى المفضلة'),
-        error: () => alert('حدث خطأ أثناء إضافة العقار إلى المفضلة')
-      });
-    }
+    // بيانات وهمية (Static Mock Data)
+    this.property = {
+      id: 1,
+      title: 'شقة فاخرة للبيع',
+      description: 'شقة ٣ غرف مساحة رائعة',
+      images: ['./assets/images/property/images (1).jpg'],
+      rooms: 3,
+      bathrooms: 2,
+      area: 130,
+      price: 950000,
+      isFavorite: false,
+      location: 'القاهرة الجديدة، التجمع الخامس',
+      addedBy: 'user123',
+      purpose: 'للبيع',
+      ownerPhone: '01012345678',
+      createdAt: new Date(),
+      category: 'سكني',
+      subCategory: 'شقة',
+      status: 'متاح',
+      availabilityDate: new Date('2025-06-01'),
+      features: ['مصعد', 'جراج', 'أمن 24 ساعة']
+    };
   }
 
   get mapUrl(): SafeResourceUrl {
@@ -66,10 +53,10 @@ export class PropertyDetailsComponent implements OnInit {
   showMessage(type: string): void {
     switch (type) {
       case 'واتس آب':
-        this.message = `يمكنك التواصل عبر واتس آب على الرقم 01012345678`;
+        this.message = `يمكنك التواصل عبر واتس آب على الرقم ${this.property?.ownerPhone}`;
         break;
       case 'اتصال':
-        this.message = `اتصل بنا على الرقم 01012345678`;
+        this.message = `اتصل بنا على الرقم ${this.property?.ownerPhone}`;
         break;
       case 'مشاركة':
         this.message = `تم مشاركة العقار معك`;
@@ -77,5 +64,12 @@ export class PropertyDetailsComponent implements OnInit {
       default:
         this.message = '';
     }
+  }
+
+  addToFavorites(): void {
+    this.property.isFavorite = !this.property.isFavorite;
+    this.message = this.property.isFavorite
+      ? 'تمت الإضافة إلى المفضلة'
+      : 'تمت الإزالة من المفضلة';
   }
 }

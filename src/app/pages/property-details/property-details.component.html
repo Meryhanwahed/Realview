@@ -1,16 +1,20 @@
 <div *ngIf="property" class="property-details-container">
 
+  <!-- العنوان والسعر -->
   <div class="header-section">
     <h2>{{ property.title }}</h2>
     <p class="price">{{ property.price | number }} جنيه</p>
   </div>
 
+  <!-- صور العقار -->
   <div class="images">
     <img *ngFor="let img of property.images" [src]="img" alt="صورة العقار" />
   </div>
 
+  <!-- تاريخ النشر -->
   <p class="publish-date">تاريخ النشر: {{ property.createdAt | date:'yyyy/MM/dd' }}</p>
 
+  <!-- معلومات المالك -->
   <div class="owner-box">
     <div class="owner-info">
       <p class="owner-name">رقم معرف المالك: {{ property.addedBy }}</p>
@@ -23,10 +27,12 @@
     </div>
   </div>
 
+  <!-- رسالة التنبيه -->
   <div *ngIf="message" class="message-box">
     <p>{{ message }}</p>
   </div>
 
+  <!-- الوصف الأساسي -->
   <div class="property-section">
     <h3>الوصف</h3>
     <ul>
@@ -35,24 +41,30 @@
       <li><strong>عدد الغرف:</strong> {{ property.rooms }}</li>
       <li><strong>عدد الحمامات:</strong> {{ property.bathrooms }}</li>
       <li><strong>الغرض:</strong> {{ property.purpose }}</li>
-      <li><strong>الفئة:</strong> {{ property.category }} / {{ property.subCategory }}</li>
+      <li *ngIf="property.category"><strong>الفئة:</strong> {{ property.category }}</li>
+      <li *ngIf="property.subCategory"><strong>الفئة الفرعية:</strong> {{ property.subCategory }}</li>
+      <li *ngIf="property.status"><strong>الحالة:</strong> {{ property.status }}</li>
+      <li *ngIf="property.availabilityDate">
+        <strong>تاريخ التوفر:</strong> {{ property.availabilityDate | date:'yyyy/MM/dd' }}
+      </li>
     </ul>
   </div>
 
+  <!-- وصف تفصيلي -->
   <div class="property-section">
     <h3>تفاصيل العقار</h3>
     <p>{{ property.description }}</p>
   </div>
 
-  
-
-
+  <!-- المميزات -->
+  <div *ngIf="property.features?.length" class="property-section">
     <h3>المميزات</h3>
     <div class="features">
       <span *ngFor="let f of property.features">{{ f }}</span>
     </div>
   </div>
 
+  <!-- الخريطة -->
   <div class="property-section">
     <h3>الموقع على الخريطة</h3>
     <iframe
@@ -65,3 +77,4 @@
     </iframe>
   </div>
 
+</div>

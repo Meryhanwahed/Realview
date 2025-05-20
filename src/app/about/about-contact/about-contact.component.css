@@ -1,0 +1,43 @@
+.mission {
+  background-color: var(--white-color);
+
+  .section-heading {
+    margin-bottom: 20px;
+    font-family: "Yeseva One", serif;
+
+    p {
+      color: var(--main-color);
+      margin-bottom: 0;
+      font-size: 20px;
+    }
+    h2 {
+      font-size: 52px;
+      margin-bottom: 0;
+    }
+  }
+  .description {
+    color: var(--paragraph-color);
+    line-height: 2;
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+
+  .image {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    animation: TopBottom 5s infinite ease-in-out;
+  }
+}
+
+@keyframes TopBottom {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  65% {
+    transform: translate(0, 30px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}

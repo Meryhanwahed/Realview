@@ -71,7 +71,7 @@ import { RouterModule } from '@angular/router';
 
               <div class="card-footer">
                 <span class="price">{{ property.price }} جنيه/شهرياً</span>
-                <button [routerLink]="['/property', property.id]" class="details-btn">اعرض التفاصيل</button>
+                <button [routerLink]="['/property-details']" class="details-btn">اعرض التفاصيل</button>
               </div>
             </div>
           </div>
@@ -132,7 +132,7 @@ export class LatestPropertiesComponent implements OnInit {
         id: 1,
         title: 'شقة فاخرة للبيع',
         description: 'شقة ٣ غرف مساحة رائعة',
-        imageUrl: 'https://via.placeholder.com/400x200',
+        imageUrl: './assets/images/property/images (1).jpg',
         rooms: 3,
         bathrooms: 2,
         area: 130,
@@ -143,7 +143,7 @@ export class LatestPropertiesComponent implements OnInit {
         id: 2,
         title: 'فيلا مستقلة للبيع',
         description: 'فيلا بتصميم عصري وحديقة',
-        imageUrl: './assets/images/property/images (1).jpg',
+        imageUrl: './assets/images/property/images (2).jpg',
         rooms: 5,
         bathrooms: 4,
         area: 450,
@@ -154,7 +154,7 @@ export class LatestPropertiesComponent implements OnInit {
         id: 3,
         title: 'دوبلكس راقي للبيع',
         description: 'دوبلكس ٤ غرف تشطيب سوبر لوكس',
-        imageUrl: './assets/images/property/sale1.jpg',
+        imageUrl: './assets/images/property/images(3).jpg',
         rooms: 4,
         bathrooms: 3,
         area: 300,
@@ -165,32 +165,21 @@ export class LatestPropertiesComponent implements OnInit {
         id: 4,
         title: 'شقة متشطبة للبيع',
         description: 'تشطيب كامل بالقرب من المترو',
-        imageUrl: './assets/images/property/sale2.jpg',
+        imageUrl: './assets/images/property/images(4).jpg',
         rooms: 2,
         bathrooms: 1,
         area: 100,
         price: 750000,
-        isFavorite: false
-      },
-      {
-        id: 5,
-        title: 'شقة فاخرة بالتجمع',
-        description: 'موقع ممتاز وتشطيب هاي لوكس',
-        imageUrl: './assets/images/property/sale3.jpg',
-        rooms: 3,
-        bathrooms: 2,
-        area: 140,
-        price: 1250000,
         isFavorite: false
       }
     ];
 
     this.rentProperties = [
       {
-        id: 10,
+        id: 5,
         title: 'شقة للإيجار بالتجمع',
         description: 'موقع مميز بالقرب من الخدمات',
-        imageUrl: './assets/images/property/images (2).jpg',
+        imageUrl: './assets/images/property/images(5).jpg',
         rooms: 3,
         bathrooms: 2,
         area: 120,
@@ -198,10 +187,10 @@ export class LatestPropertiesComponent implements OnInit {
         isFavorite: false
       },
       {
-        id: 11,
+        id: 6,
         title: 'ستوديو مفروش للإيجار',
         description: 'تشطيب فاخر وجاهز للسكن',
-        imageUrl: './assets/images/property/images.jpg',
+        imageUrl: './assets/images/property/images (1).jpg',
         rooms: 1,
         bathrooms: 1,
         area: 50,
@@ -209,10 +198,10 @@ export class LatestPropertiesComponent implements OnInit {
         isFavorite: false
       },
       {
-        id: 12,
+        id: 7,
         title: 'شقة عائلية للإيجار',
         description: '3 غرف وصالة قريبة من الخدمات',
-        imageUrl: './assets/images/property/rent1.jpg',
+        imageUrl: './assets/images/property/images(6).jpg',
         rooms: 3,
         bathrooms: 2,
         area: 130,
@@ -220,25 +209,14 @@ export class LatestPropertiesComponent implements OnInit {
         isFavorite: false
       },
       {
-        id: 13,
+        id: 8,
         title: 'شقة مفروشة للإيجار الشهري',
         description: 'تشطيب ممتاز في حي راقٍ',
-        imageUrl: './assets/images/property/rent2.jpg',
+        imageUrl: './assets/images/property/images (2).jpg',
         rooms: 2,
         bathrooms: 1,
         area: 90,
         price: 5500,
-        isFavorite: false
-      },
-      {
-        id: 14,
-        title: 'شقة صغيرة للإيجار',
-        description: 'غرفة واحدة وسعر مناسب',
-        imageUrl: './assets/images/property/rent3.jpg',
-        rooms: 1,
-        bathrooms: 1,
-        area: 60,
-        price: 3000,
         isFavorite: false
       }
     ];

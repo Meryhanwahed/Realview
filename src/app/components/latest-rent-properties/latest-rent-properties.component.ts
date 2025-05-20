@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-latest-rent-properties',
@@ -12,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./latest-rent-properties.component.css']
 })
 export class LatestRentPropertiesComponent implements OnInit {
-  properties: Property[] = [];
+  properties: any[] = [];
   types: string[] = ['شقة', 'فيلا', 'استوديو'];
   locations: string[] = ['القاهرة', 'الجيزة', 'الإسكندرية'];
 
@@ -20,7 +21,7 @@ export class LatestRentPropertiesComponent implements OnInit {
   selectedLocation: string = '';
   page: number = 1;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.fetchProperties();
@@ -30,7 +31,7 @@ export class LatestRentPropertiesComponent implements OnInit {
     const params: any = {
       page: this.page,
       limit: 8,
-      purpose: 'rent',
+      purpose: 'Rent',
       ...(this.selectedType && { type: this.selectedType }),
       ...(this.selectedLocation && { location: this.selectedLocation })
     };
@@ -43,25 +44,27 @@ export class LatestRentPropertiesComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.properties = res.data;
-          console.log("res", res);
+          console.log("Rent Properties Response:", res);
         },
         error: (err) => {
-          console.error('خطأ في جلب البيانات:', err);
+          console.error('خطأ في جلب بيانات الإيجار:', err);
         }
       });
   }
-}
 
-interface Property {
-  id: number;
-  title: string;
-  description: string;
-  images: string[];
-  price: number;
-  rooms: number;
-  bathrooms: number;
-  area: number;
-  type: string;
-  location: string;
-  purpose: string;
+  goToDetails(id: string) {
+    this.router.navigate(['/property', id]);
+  }
+
+  nextPage() {
+    this.page++;
+    this.fetchProperties();
+  }
+
+  prevPage() {
+    if (this.page > 1) {
+      this.page--;
+      this.fetchProperties();
+    }
+  }
 }

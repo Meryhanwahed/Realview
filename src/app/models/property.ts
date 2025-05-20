@@ -1,5 +1,5 @@
 export interface Property {
-  _id: string;
+  _id: string; // ✅ أضف هذا السطر
   area: number;
   availabFrom: string;
   bathrooms: number;

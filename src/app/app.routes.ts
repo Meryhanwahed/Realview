@@ -29,9 +29,12 @@ import { AdminLoginComponent } from './admin/admin-login.component';
 import { ChangePasswordComponent } from './admin/change-password/change-password.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
-import { PropertiesDetailsComponent } from './properties-details/properties-details.component';
+import { PropertyDetailsComponent } from './pages/property-details/property-details.component';
 export const routes: Routes = [
-  {path:'property-details/:id', component:PropertiesDetailsComponent},
+{
+  path: 'property/:id',
+  component: PropertyDetailsComponent
+},
   { path: 'auth/forgot-password', component: ForgotPasswordComponent },
   { path: 'auth/reset-password', component: ResetPasswordComponent },
   { path: 'admin/change-password', component: ChangePasswordComponent, canActivate: [AdminAuthGuard] },

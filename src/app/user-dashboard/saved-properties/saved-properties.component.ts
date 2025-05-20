@@ -9,8 +9,8 @@ import { CommonModule } from '@angular/common';
 })
 export class SavedPropertiesComponent {
   savedProperties = [
-    { id: 1, title: 'شقة في القاهرة', price: 50000, image: 'assets/house1.jpg' },
-    { id: 2, title: 'فيلا في الإسكندرية', price: 120000, image: 'assets/house2.jpg' }
+    { id: 1, title: 'شقة في القاهرة', price: 50000, image: './assets/images/property/images (1).jpg' },
+    { id: 2, title: 'فيلا في الإسكندرية', price: 120000, image: './assets/images/property/images (2).jpg' }
   ];
 
   removeFromSaved(id: number) {
